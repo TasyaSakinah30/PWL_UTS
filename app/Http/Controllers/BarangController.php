@@ -14,10 +14,16 @@ class BarangController extends Controller
      */
     public function index()
     {
-        $barangs = Barang::all(); 
-        $posts = Barang::orderBy('id', 'asc')->paginate(21);
+        // $barangs = Barang::all(); 
+        // $posts = Barang::orderBy('id', 'asc')->paginate(21);
+        $search = request()->query('search');
+         if($search) {
+            $posts = Barang::where('kode_barang', 'LIKE', "%{$search}%")->paginate(4);
+        } else {
+            $posts = Barang::orderBy('id', 'asc')->paginate(21);
+        }
         return view('barangs.index', compact('posts'));
-        // with('i', (request()->input('page', 1) - 1) * 5);
+        with('i', (request()->input('page', 1) - 1) * 5);
 
     }
 
