@@ -8,6 +8,11 @@
             <div class="float-right my-2">
                 <a class="btn btn-warning" href="{{ route('barang.create') }}"> Input Barang</a>
             </div>
+            <div>
+                <form class="input-group" action="{{ route('barang.index') }}" method="GET">
+                    <input type="text" class="form-control" name="search" placeholder="Search Barang">
+                </form>
+            </div>
         </div>
     </div>
  
@@ -49,6 +54,11 @@
         </td>
     </tr>
     @endforeach
+    @else
+    <h4 class="text-danger">*User Not Found</h4>
     @endif
  </table>
+ <div class="d-flex float-right">
+    {{$posts->links('pagination::bootstrap-4')}}
+</div>
 @endsection
